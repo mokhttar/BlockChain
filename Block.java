@@ -11,19 +11,39 @@ public class Block {
     private String data; // data of the blockChain like transactions
     private String previousHash; // to keep track of the prev blocks
     private String currentHash; // this is the hash of the current block we get it add the prev data and hash
-                                // them
+                                // then
+    
+    
+    private int nonce;
+
+
+    // Blocks blockChain = new Blocks();
 
     public Block(int index, String data, String previousHash) {
         this.index = index;
+    
         this.timestamp = LocalTime.now();
         this.data = data;
         this.previousHash = previousHash;
         this.currentHash = calculateHash();
+        this.nonce = 0;
     }
 
     public String calculateHash() {
-        String text = String
-                .valueOf(getIndex() + getPreviousHash() + String.valueOf(getTimestamp()) + String.valueOf(getData()));
+        // String text = String
+        //         .valueOf(getIndex() + getPreviousHash() + String.valueOf(getTimestamp()) + String.valueOf(getData())+String.valueOf(getNonce()));
+
+
+
+        StringBuilder text = new StringBuilder();
+        text.append(getIndex())
+            .append(getPreviousHash())
+            .append(getTimestamp().toString()) 
+            .append(getData())
+            .append(getNonce());
+
+
+
         MessageDigest digest = null;
         try {
 
@@ -31,7 +51,9 @@ public class Block {
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
         }
-        final byte bytes[] = digest.digest(text.getBytes());
+        // final byte bytes[] = digest.digest(text.getBytes());
+
+        final byte bytes[] = digest.digest(text.toString().getBytes());
         final StringBuilder hexString = new StringBuilder();
         for (final byte b : bytes) {
             String hex = Integer.toHexString(0xff & b);
@@ -92,6 +114,14 @@ public class Block {
 
     public void setCurrentHash(String currentHash) {
         this.currentHash = currentHash;
+    }
+
+    public int getNonce() {
+        return this.nonce;
+    }
+
+    public void setNonce(int nonce) {
+        this.nonce = nonce;
     }
 
 }
