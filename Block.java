@@ -4,7 +4,16 @@ import java.security.NoSuchAlgorithmException;
 
 import java.time.LocalTime;
 
+
+
+
+
+
 public class Block {
+
+   Transaction newTranscation =  new Transaction(null, getCurrentHash(), null);
+
+
 
     private int index; // we use this to keep track of the numbers of the blocks in the block chain
     private LocalTime timestamp; // to store the date or something
