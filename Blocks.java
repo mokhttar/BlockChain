@@ -54,12 +54,12 @@ public class Blocks {
 
     // method to add blocks into the blockChain
     public void addBlocks(String data) {
-        // Block newBlock = new Block(incrementIndex(blockChain), data, getLastHash(blockChain));
-        // boolean Mined = miner.mineBlock(newBlock);
-        // if (Mined)
-        //     blockChain.add(newBlock);
+        Block newBlock = new Block(incrementIndex(blockChain), data, getLastHash(blockChain));
+        boolean Mined = miner.mineBlock(newBlock);
+        if (Mined)
+            blockChain.add(newBlock);
 
-        blockChain.add(new Block(incrementIndex(blockChain), data, getLastHash(blockChain)));
+        // blockChain.add(new Block(incrementIndex(blockChain), data, getLastHash(blockChain)));
     }
 
     public ArrayList<String> getTransactions(ArrayList<Block> blockChain) {
