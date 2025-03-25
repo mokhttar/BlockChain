@@ -3,6 +3,7 @@ import java.security.NoSuchAlgorithmException;
 // import java.util.Date;
 
 import java.time.LocalTime;
+import java.util.ArrayList;
 
 public class Block {
 
@@ -12,16 +13,14 @@ public class Block {
     private String previousHash; // to keep track of the prev blocks
     private String currentHash; // this is the hash of the current block we get it add the prev data and hash
                                 // then
-    
-    
-    private int nonce;
+    private ArrayList<Transactions> transactions;
 
+    private int nonce;
 
     // Blocks blockChain = new Blocks();
 
     public Block(int index, String data, String previousHash) {
         this.index = index;
-    
         this.timestamp = LocalTime.now();
         this.data = data;
         this.previousHash = previousHash;
@@ -31,18 +30,15 @@ public class Block {
 
     public String calculateHash() {
         // String text = String
-        //         .valueOf(getIndex() + getPreviousHash() + String.valueOf(getTimestamp()) + String.valueOf(getData())+String.valueOf(getNonce()));
-
-
+        // .valueOf(getIndex() + getPreviousHash() + String.valueOf(getTimestamp()) +
+        // String.valueOf(getData())+String.valueOf(getNonce()));
 
         StringBuilder text = new StringBuilder();
         text.append(getIndex())
-            .append(getPreviousHash())
-            .append(getTimestamp().toString()) 
-            .append(getData())
-            .append(getNonce());
-
-
+                .append(getPreviousHash())
+                .append(getTimestamp().toString())
+                .append(getData())
+                .append(getNonce());
 
         MessageDigest digest = null;
         try {

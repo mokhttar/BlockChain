@@ -9,7 +9,6 @@ import java.util.List;
 // private String data; // data of the blockChain like transactions
 // private String previousHash; // to keep track of the prev blocks
 // private String currentHash;
-
 // 
 
 public class Blocks {
@@ -59,7 +58,8 @@ public class Blocks {
         if (Mined)
             blockChain.add(newBlock);
 
-        // blockChain.add(new Block(incrementIndex(blockChain), data, getLastHash(blockChain)));
+        // blockChain.add(new Block(incrementIndex(blockChain), data,
+        // getLastHash(blockChain)));
     }
 
     public ArrayList<String> getTransactions(ArrayList<Block> blockChain) {
@@ -73,6 +73,8 @@ public class Blocks {
     // in normal block chain we use the all th e trasaction in my case i have only
     // one trasnaction and that it my data
     public String MerkleRoot(List<String> transactions) {
+
+        // this shit wont happend because of the genesis block
         if (blockChain.isEmpty())
             return "";
         List<String> hashes = new ArrayList<>(transactions);
@@ -92,6 +94,13 @@ public class Blocks {
             hashes = newHashes;
         }
         return hashes.get(0);
+    }
+
+    public void printMerkleRootForBlocks(ArrayList<String> transactions) {
+        for (String transaction : transactions) {
+            System.out.println("Merkle Root...."+transaction);
+        }
+
     }
 
     private String applySHA256(String input) {
